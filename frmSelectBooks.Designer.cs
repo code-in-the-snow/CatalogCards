@@ -37,6 +37,7 @@
             this.btnMakeCard = new System.Windows.Forms.Button();
             this.grpFictionButtons = new System.Windows.Forms.GroupBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.grpFictionButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +100,7 @@
             this.btnMakeCard.Name = "btnMakeCard";
             this.btnMakeCard.Size = new System.Drawing.Size(134, 30);
             this.btnMakeCard.TabIndex = 5;
-            this.btnMakeCard.Text = "Prepare Card";
+            this.btnMakeCard.Text = "Preview Card";
             this.btnMakeCard.UseVisualStyleBackColor = true;
             this.btnMakeCard.Click += new System.EventHandler(this.btnMakeCard_Click);
             // 
@@ -116,18 +117,29 @@
             // btnPrint
             // 
             this.btnPrint.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(438, 267);
+            this.btnPrint.Location = new System.Drawing.Point(231, 269);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(134, 30);
             this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "Print Card";
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(445, 269);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(134, 30);
+            this.btnExit.TabIndex = 8;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            // 
             // frmSelectBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(596, 311);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.grpFictionButtons);
             this.Controls.Add(this.btnMakeCard);
@@ -153,6 +165,7 @@
         private System.Windows.Forms.Button btnMakeCard;
         private System.Windows.Forms.GroupBox grpFictionButtons;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 

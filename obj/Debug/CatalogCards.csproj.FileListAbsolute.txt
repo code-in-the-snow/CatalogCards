@@ -8,3 +8,13 @@ c:\users\owner\documents\visual studio 2013\CatalogCards\obj\Debug\CatalogCards.
 c:\users\owner\documents\visual studio 2013\CatalogCards\obj\Debug\CatalogCards.pdb
 c:\Users\Owner\Documents\Visual Studio 2013\CatalogCards\obj\Debug\CatalogCards.frmCatalogCard.resources
 c:\Users\Owner\Documents\Visual Studio 2013\CatalogCards\obj\Debug\CatalogCards.frmSelectBooks.resources
+C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\CatalogCards.exe.config
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.exe
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.pdb
+C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\CatalogCards.exe
+C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\CatalogCards.pdb
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.csprojResolveAssemblyReference.cache
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.frmCatalogCard.resources
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.Properties.Resources.resources
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.frmSelectBooks.resources
+C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.csproj.GenerateResource.Cache

@@ -65,9 +65,8 @@
             this.lblISBN.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblISBN.Location = new System.Drawing.Point(12, 288);
             this.lblISBN.Name = "lblISBN";
-            this.lblISBN.Size = new System.Drawing.Size(147, 14);
+            this.lblISBN.Size = new System.Drawing.Size(0, 14);
             this.lblISBN.TabIndex = 2;
-            this.lblISBN.Text = "ISBN:  9780544388499";
             // 
             // lblAuthor
             // 
@@ -75,9 +74,8 @@
             this.lblAuthor.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAuthor.Location = new System.Drawing.Point(116, 44);
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(161, 14);
+            this.lblAuthor.Size = new System.Drawing.Size(0, 14);
             this.lblAuthor.TabIndex = 3;
-            this.lblAuthor.Text = "Heltzel, Anne, author.";
             // 
             // lblTitle
             // 
@@ -85,9 +83,8 @@
             this.lblTitle.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(143, 58);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(238, 14);
+            this.lblTitle.Size = new System.Drawing.Size(0, 14);
             this.lblTitle.TabIndex = 4;
-            this.lblTitle.Text = "Church of Marvels / Anne Heltzel.";
             // 
             // lblPublisherInfo
             // 
@@ -95,9 +92,8 @@
             this.lblPublisherInfo.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPublisherInfo.Location = new System.Drawing.Point(132, 72);
             this.lblPublisherInfo.Name = "lblPublisherInfo";
-            this.lblPublisherInfo.Size = new System.Drawing.Size(301, 14);
+            this.lblPublisherInfo.Size = new System.Drawing.Size(0, 14);
             this.lblPublisherInfo.TabIndex = 5;
-            this.lblPublisherInfo.Text = "Boston : Houghton Mifflin Harcourt, (2016)";
             // 
             // lblPages
             // 
@@ -105,25 +101,18 @@
             this.lblPages.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPages.Location = new System.Drawing.Point(143, 86);
             this.lblPages.Name = "lblPages";
-            this.lblPages.Size = new System.Drawing.Size(126, 14);
+            this.lblPages.Size = new System.Drawing.Size(0, 14);
             this.lblPages.TabIndex = 6;
-            this.lblPages.Text = "262 pages ; 22 cm";
             // 
             // lstSubjects
             // 
-            this.lstSubjects.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstSubjects.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstSubjects.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstSubjects.FormattingEnabled = true;
-            this.lstSubjects.ItemHeight = 14;
-            this.lstSubjects.Items.AddRange(new object[] {
-            "1. Secrets Juvenile fiction.",
-            "2. Voyages and travels Juvenile fiction.",
-            "3. Missing persons Juvenile fiction.",
-            "4. Detective and mystery stories.",
-            "5. Secrets Fiction.",
-            "6. Dating (Social customs) Fiction. (CONTINUED)"});
-            this.lstSubjects.Location = new System.Drawing.Point(116, 188);
+            this.lstSubjects.ItemHeight = 15;
+            this.lstSubjects.Location = new System.Drawing.Point(116, 160);
             this.lstSubjects.Name = "lstSubjects";
-            this.lstSubjects.Size = new System.Drawing.Size(465, 88);
+            this.lstSubjects.Size = new System.Drawing.Size(465, 90);
             this.lstSubjects.TabIndex = 7;
             // 
             // lblSummary
@@ -152,6 +141,7 @@
             this.Controls.Add(this.lbFiction);
             this.Name = "frmCatalogCard";
             this.Text = "CatalogCard";
+            this.Load += new System.EventHandler(this.frmCatalogCard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
