@@ -103,6 +103,7 @@ namespace CatalogCards
         {
             int commaIndex = name.IndexOf(",");
             lblName.Text = name.Substring(0, commaIndex);
+            lblTitle.Text += " / " + name.Substring(commaIndex + 1) + " " + name.Substring(0, commaIndex);
         }
 
         public void SetControls(Book B)
@@ -132,10 +133,12 @@ namespace CatalogCards
                     lblAuthor.Text += ", " + authors[i];
                 }
                 lblAuthor.Text += ", authors.";
+                lblTitle.Text += " et al.";
             }
             else
             {
                 lblAuthor.Text += ", author.";
+                lblTitle.Text += ".";
             }
         }
 
@@ -146,18 +149,13 @@ namespace CatalogCards
             {
                 List<string> temp = new List<string>(name.Split( new char[] {' '} ));
                 temp.Reverse();
-                lastFirst.Add(String.Join(",", temp));
+                lastFirst.Add(String.Join(", ", temp));
             }
-            
-            if (authors.ToArray().Length > 1)
+            lblAuthor.Text = lastFirst[0];
+            int numAuths = lastFirst.ToArray().Length;
+            for (int i = 1; i < numAuths; i++)
             {
-                lblTitle.Text += " / " + lastFirst[0] + " et al.";
-                lblAuthor.Text += ", authors.";
-            }
-            else
-            {
-                lblTitle.Text += " / " + lastFirst[0] + ".";
-                lblAuthor.Text += ", author.";
+                lblAuthor.Text += ", " + lastFirst[i];
             }
         }
        
@@ -192,21 +190,61 @@ namespace CatalogCards
 
             SetControls(B);
 
-            // Populate form labels depending on type of call number (ie fiction or nonfiction) and
-            // whether the author's name is returned from the API Last, First or First Last. 
+            // Populate form labels that include author name: author name, call number and 
+            //    title.  Format of author names in not standardized in OCLC database.
+
             if ((this.fiction == false) && B.authors[0].IndexOf(',') == -1)
             {
-                GetCallNumber(raw_data);
-                SplitOnSpace(B.authors[0]);
-                lblName.Text = lblName.Text.Substring(0, 3);
+                GetCallNumber(raw_data); // lblFiction
+                SplitOnSpace(B.authors[0]); // lblName
+                lblName.Text = lblName.Text.Substring(0, 3); // lblName
 
-                lblTitle.Text += " / " + B.authors[0] + ".";
-                AuthorsToString(B.authors);                
+                AuthorsReversedToString(B.authors);  // lblAuthors and lblTitle
+                if (B.authors.ToArray().Length > 1)
+                {
+                    lblTitle.Text += " / " + B.authors[0] + " et al.";
+                    lblAuthor.Text += ", authors.";
+                }
+                else
+                {
+                    lblTitle.Text += " / " + B.authors[0] + ".";
+                    lblAuthor.Text += ", author.";
+                }
+                MessageBox.Show("nonfiction and 'First Last'");            
             }
+
+            else if (this.fiction == false && B.authors[0].IndexOf(',') != -1)
+            {
+                GetCallNumber(raw_data); // lblFiction
+                SplitOnComma(B.authors[0]);
+                lblName.Text = lblName.Text.Substring(0, 3); // lblName
+                AuthorsToString(B.authors); // lblAuthor and lblTitle
+                MessageBox.Show("nonfiction and 'Last, First'");
+            }
+
             else if (this.fiction && (B.authors[0].IndexOf(',') != -1))
             {
-                SplitOnComma(B.authors[0]);
-                
+                SplitOnComma(B.authors[0]); 
+                AuthorsToString(B.authors); // lblAuthor and lblTitle
+                MessageBox.Show("fiction and 'Last, First'");
+            }
+
+            else // (this.fiction && B.authors[0].IndexOf(',') == -1)
+            {
+                SplitOnSpace(B.authors[0]); // lblName
+                AuthorsReversedToString(B.authors); // lblAuthor
+
+                if (B.authors.ToArray().Length > 1) // lblAuthor and lblTitle
+                {
+                    lblTitle.Text += " / " + B.authors[0] + " et al.";
+                    lblAuthor.Text += ", authors.";
+                }
+                else
+                {
+                    lblTitle.Text += " / " + B.authors[0] + ".";
+                    lblAuthor.Text += ", author.";
+                }
+                MessageBox.Show("fiction and 'First Last'");
             }
         }
 
