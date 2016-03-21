@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbFiction = new System.Windows.Forms.Label();
+            this.lblFiction = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblISBN = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
@@ -39,15 +39,14 @@
             this.lblSummary = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lbFiction
+            // lblFiction
             // 
-            this.lbFiction.AutoSize = true;
-            this.lbFiction.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFiction.Location = new System.Drawing.Point(12, 12);
-            this.lbFiction.Name = "lbFiction";
-            this.lbFiction.Size = new System.Drawing.Size(56, 14);
-            this.lbFiction.TabIndex = 0;
-            this.lbFiction.Text = "FICTION";
+            this.lblFiction.AutoSize = true;
+            this.lblFiction.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFiction.Location = new System.Drawing.Point(12, 12);
+            this.lblFiction.Name = "lblFiction";
+            this.lblFiction.Size = new System.Drawing.Size(0, 14);
+            this.lblFiction.TabIndex = 0;
             // 
             // lblName
             // 
@@ -55,9 +54,8 @@
             this.lblName.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(12, 25);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(56, 14);
+            this.lblName.Size = new System.Drawing.Size(0, 14);
             this.lblName.TabIndex = 1;
-            this.lblName.Text = "Sjowall";
             // 
             // lblISBN
             // 
@@ -120,10 +118,9 @@
             this.lblSummary.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSummary.Location = new System.Drawing.Point(116, 111);
             this.lblSummary.Name = "lblSummary";
-            this.lblSummary.Size = new System.Drawing.Size(465, 70);
+            this.lblSummary.Size = new System.Drawing.Size(465, 46);
             this.lblSummary.TabIndex = 8;
-            this.lblSummary.Text = "   Summary: Told in separate voices, Lena and Aubrey, each hiding her own secreet" +
-    "s, set off in search of the truth about Charlie.";
+            this.lblSummary.Text = "   Summary: \r\n";
             // 
             // frmCatalogCard
             // 
@@ -138,7 +135,7 @@
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lblISBN);
             this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lbFiction);
+            this.Controls.Add(this.lblFiction);
             this.Name = "frmCatalogCard";
             this.Text = "CatalogCard";
             this.Load += new System.EventHandler(this.frmCatalogCard_Load);
@@ -149,7 +146,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbFiction;
+        private System.Windows.Forms.Label lblFiction;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblISBN;
         private System.Windows.Forms.Label lblAuthor;

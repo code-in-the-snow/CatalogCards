@@ -12,8 +12,8 @@ using System.Windows.Forms;
 namespace CatalogCards
 {
     public partial class frmSelectBooks : Form
-    {        
-        
+    {
+
 
         public frmSelectBooks()
         {
@@ -35,10 +35,21 @@ namespace CatalogCards
             }
 
             // pass txtISBN to function GetAPIData()
-            
             frmCatalogCard objCard = new frmCatalogCard();
             objCard.isbn = txtISBN.Text;
+            objCard.id = "ISBN:" + txtISBN.Text;
+            objCard.fiction = radFiction.Checked;
             objCard.Show();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            // print objCard
         }
     }
 }

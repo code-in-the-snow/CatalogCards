@@ -18,3 +18,5 @@ C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.frmCatalogCa
 C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.Properties.Resources.resources
 C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.frmSelectBooks.resources
 C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.csproj.GenerateResource.Cache
+C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\Newtonsoft.Json.xml

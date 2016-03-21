@@ -44,13 +44,11 @@
             // radFiction
             // 
             this.radFiction.AutoSize = true;
-            this.radFiction.Checked = true;
             this.radFiction.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radFiction.Location = new System.Drawing.Point(6, 19);
             this.radFiction.Name = "radFiction";
             this.radFiction.Size = new System.Drawing.Size(66, 22);
             this.radFiction.TabIndex = 0;
-            this.radFiction.TabStop = true;
             this.radFiction.Text = "Fiction";
             this.radFiction.UseVisualStyleBackColor = true;
             // 
@@ -123,6 +121,7 @@
             this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "Print Card";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnExit
             // 
@@ -133,9 +132,11 @@
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmSelectBooks
             // 
+            this.AcceptButton = this.btnMakeCard;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(596, 311);
