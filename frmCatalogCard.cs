@@ -30,6 +30,11 @@ namespace CatalogCards
         public string id { get; set; }
         public bool fiction { get; set; }
         
+        public void DoNotDisplay()
+        {
+            this.Close();
+        }
+        
         public Newtonsoft.Json.Linq.JObject GetAPIData()
         {
             string url_base = @"https://openlibrary.org/api/books?bibkeys=";
@@ -58,12 +63,12 @@ namespace CatalogCards
                     i++;
                 }
 
-                catch (NullReferenceException oEx)
+                catch (NullReferenceException)
                 {
                     is_more = false;
                 }
 
-                catch (ArgumentOutOfRangeException oEx)
+                catch (ArgumentOutOfRangeException)
                 {
                     is_more = false;
                 }
@@ -82,11 +87,11 @@ namespace CatalogCards
                     temp += (string)obj[id]["classifications"]["dewey_decimal_class"][i];
                     i++;
                 }
-                catch (ArgumentOutOfRangeException oEx)
+                catch (ArgumentOutOfRangeException)
                 {
                     is_more = false;
                 }
-                catch (NullReferenceException oEx)
+                catch (NullReferenceException)
                 {
                     is_more = false;
                 }
@@ -97,6 +102,20 @@ namespace CatalogCards
         {
             int spaceIndex = name.IndexOf(" ");
             lblName.Text = name.Substring(spaceIndex+1);
+        }
+
+        public void AddAuthorToTitle( List<string> names)
+        {
+            if (names.ToArray().Length > 1) 
+            {
+                lblTitle.Text += " / " + names[0] + " et al.";
+                lblAuthor.Text += ", authors.";
+            }
+            else
+            {
+                lblTitle.Text += " / " + names[0] + ".";
+                lblAuthor.Text += ", author.";
+            }
         }
 
         public void SplitOnComma(string name)
@@ -169,84 +188,72 @@ namespace CatalogCards
 
             Newtonsoft.Json.Linq.JObject raw_data = new Newtonsoft.Json.Linq.JObject();
             raw_data = GetAPIData();
-            
-            // load details for current book
-            Book B = new Book();
 
             try
             {
-                B.publish_place = (string)raw_data[this.id]["publish_places"][0]["name"]; 
-            }
-            catch (NullReferenceException nObj)
-            {
-                B.publish_place = " ";
-            }
-            B.publisher = (string)raw_data[this.id]["publishers"][0]["name"];
-            B.publish_date = (string)raw_data[this.id]["publish_date"];
-            B.pages = (string)raw_data[this.id]["number_of_pages"];
-            B.title = (string)raw_data[this.id]["title"];
-            B.subjects = PullDictionaryData(raw_data, "subjects", id);
-            B.authors = PullDictionaryData(raw_data, "authors", id);
-
-            SetControls(B);
-
-            // Populate form labels that include author name: author name, call number and 
-            //    title.  Format of author names in not standardized in OCLC database.
-
-            if ((this.fiction == false) && B.authors[0].IndexOf(',') == -1)
-            {
-                GetCallNumber(raw_data); // lblFiction
-                SplitOnSpace(B.authors[0]); // lblName
-                lblName.Text = lblName.Text.Substring(0, 3); // lblName
-
-                AuthorsReversedToString(B.authors);  // lblAuthors and lblTitle
-                if (B.authors.ToArray().Length > 1)
+                if ((string)raw_data[this.id]["title"] != "")
                 {
-                    lblTitle.Text += " / " + B.authors[0] + " et al.";
-                    lblAuthor.Text += ", authors.";
+                    // load details for current ISBN
+                    Book B = new Book();
+                    try
+                    {
+                        B.publish_place = (string)raw_data[this.id]["publish_places"][0]["name"];
+                    }
+                    catch (NullReferenceException)
+                    {
+                        B.publish_place = " ";
+                    }
+                    B.title = (string)raw_data[this.id]["title"];
+                    B.publisher = (string)raw_data[this.id]["publishers"][0]["name"];
+                    B.publish_date = (string)raw_data[this.id]["publish_date"];
+                    B.pages = (string)raw_data[this.id]["number_of_pages"];
+                    B.subjects = PullDictionaryData(raw_data, "subjects", id);
+                    B.authors = PullDictionaryData(raw_data, "authors", id);
+
+                    SetControls(B);
+
+                    // Check if the author name(s) is stored "First Last" or "Last, First" and then 
+                    //   populate the form labels that include name: Name (for call number), Title and Author.
+                    //   Fiction call numbers use entire last name.  Nonfiction call numbers use first 
+                    //   three characters of last name.
+
+                    if ((this.fiction == false) && B.authors[0].IndexOf(',') == -1)
+                    {
+                        GetCallNumber(raw_data); 
+                        SplitOnSpace(B.authors[0]); 
+                        lblName.Text = lblName.Text.Substring(0, 3); 
+
+                        AuthorsReversedToString(B.authors);  
+                        AddAuthorToTitle(B.authors);
+                    }
+
+                    else if (this.fiction == false && B.authors[0].IndexOf(',') != -1)
+                    {
+                        GetCallNumber(raw_data); 
+                        SplitOnComma(B.authors[0]);
+                        lblName.Text = lblName.Text.Substring(0, 3); 
+                        AuthorsToString(B.authors); 
+                    }
+
+                    else if (this.fiction && (B.authors[0].IndexOf(',') != -1))
+                    {
+                        SplitOnComma(B.authors[0]);
+                        AuthorsToString(B.authors); 
+                    }
+
+                    else // (this.fiction && B.authors[0].IndexOf(',') == -1)
+                    {
+                        SplitOnSpace(B.authors[0]); 
+                        AuthorsReversedToString(B.authors); 
+                        AddAuthorToTitle(B.authors);
+                    }
                 }
-                else
-                {
-                    lblTitle.Text += " / " + B.authors[0] + ".";
-                    lblAuthor.Text += ", author.";
-                }
-                MessageBox.Show("nonfiction and 'First Last'");            
             }
-
-            else if (this.fiction == false && B.authors[0].IndexOf(',') != -1)
+            catch (NullReferenceException)
             {
-                GetCallNumber(raw_data); // lblFiction
-                SplitOnComma(B.authors[0]);
-                lblName.Text = lblName.Text.Substring(0, 3); // lblName
-                AuthorsToString(B.authors); // lblAuthor and lblTitle
-                MessageBox.Show("nonfiction and 'Last, First'");
-            }
-
-            else if (this.fiction && (B.authors[0].IndexOf(',') != -1))
-            {
-                SplitOnComma(B.authors[0]); 
-                AuthorsToString(B.authors); // lblAuthor and lblTitle
-                MessageBox.Show("fiction and 'Last, First'");
-            }
-
-            else // (this.fiction && B.authors[0].IndexOf(',') == -1)
-            {
-                SplitOnSpace(B.authors[0]); // lblName
-                AuthorsReversedToString(B.authors); // lblAuthor
-
-                if (B.authors.ToArray().Length > 1) // lblAuthor and lblTitle
-                {
-                    lblTitle.Text += " / " + B.authors[0] + " et al.";
-                    lblAuthor.Text += ", authors.";
-                }
-                else
-                {
-                    lblTitle.Text += " / " + B.authors[0] + ".";
-                    lblAuthor.Text += ", author.";
-                }
-                MessageBox.Show("fiction and 'First Last'");
+                MessageBox.Show("Oops! We didn't find that edition. Check the ISBN.");
+                DoNotDisplay();
             }
         }
-
     }
 }
