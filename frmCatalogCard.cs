@@ -35,7 +35,7 @@ namespace CatalogCards
             this.Close();
         }
         
-        public Newtonsoft.Json.Linq.JObject GetAPIData()
+        Newtonsoft.Json.Linq.JObject GetAPIData()
         {
             string url_base = @"https://openlibrary.org/api/books?bibkeys=";
             string url_params = "&jscmd=data&format=json";
@@ -49,7 +49,7 @@ namespace CatalogCards
             return obj;
         }
 
-        public static List<string> PullDictionaryData(Newtonsoft.Json.Linq.JObject obj, string detail, string root)
+        static List<string> PullDictionaryData(Newtonsoft.Json.Linq.JObject obj, string detail, string root)
         {
             int i = 0;
             bool is_more = true;
@@ -76,7 +76,7 @@ namespace CatalogCards
             return dataList;
         }
 
-        public void GetCallNumber(Newtonsoft.Json.Linq.JObject obj)
+        void GetCallNumber(Newtonsoft.Json.Linq.JObject obj)
         {
             string temp = "";
             int i = 0;
@@ -98,7 +98,7 @@ namespace CatalogCards
             lblFiction.Text = temp;
         }
 
-        public void SplitOnSpace(string name)
+        void SplitOnSpace(string name)
         {
             int spaceIndex = name.IndexOf(" ");
             lblName.Text = name.Substring(spaceIndex+1);
@@ -118,14 +118,14 @@ namespace CatalogCards
             }
         }
 
-        public void SplitOnComma(string name)
+        void SplitOnComma(string name)
         {
             int commaIndex = name.IndexOf(",");
             lblName.Text = name.Substring(0, commaIndex);
             lblTitle.Text += " / " + name.Substring(commaIndex + 1) + " " + name.Substring(0, commaIndex);
         }
 
-        public void SetControls(Book B)
+        void SetControls(Book B)
         {
             if (this.fiction) { lblFiction.Text = "FICTION"; };
             lblTitle.Text = B.title;
@@ -141,7 +141,7 @@ namespace CatalogCards
             }
         }
 
-        public void AuthorsToString(List<string> authors)
+        void AuthorsToString(List<string> authors)
         {
             lblAuthor.Text = authors[0];
             int numAuthors = authors.ToArray().Length;
@@ -161,7 +161,7 @@ namespace CatalogCards
             }
         }
 
-        public void AuthorsReversedToString(List<string> authors)
+        void AuthorsReversedToString(List<string> authors)
         {
             List<String> lastFirst = new List<String>();
             foreach ( string name in authors)
@@ -183,7 +183,7 @@ namespace CatalogCards
             InitializeComponent();
         }
 
-        public void frmCatalogCard_Load(object sender, EventArgs e)
+        void frmCatalogCard_Load(object sender, EventArgs e)
         {
 
             Newtonsoft.Json.Linq.JObject raw_data = new Newtonsoft.Json.Linq.JObject();
