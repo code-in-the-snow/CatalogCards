@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -35,20 +33,6 @@ namespace CatalogCards
             this.Close();
         }
         
-        private Newtonsoft.Json.Linq.JObject GetAPIData()
-        {
-            string url_base = @"https://openlibrary.org/api/books?bibkeys=";
-            string url_params = "&jscmd=data&format=json";
-
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(url_base + this.id + url_params);
-            StreamReader reader = new StreamReader(stream);
-
-            Newtonsoft.Json.Linq.JObject obj = Newtonsoft.Json.Linq.JObject.Parse(reader.ReadLine());
-            stream.Close();
-            return obj;
-        }
-
         private static List<string> PullDictionaryData(Newtonsoft.Json.Linq.JObject obj, string detail, string root)
         {
             int i = 0;
@@ -185,9 +169,9 @@ namespace CatalogCards
 
         private void frmCatalogCard_Load(object sender, EventArgs e)
         {
-
-            Newtonsoft.Json.Linq.JObject raw_data = new Newtonsoft.Json.Linq.JObject();
-            raw_data = GetAPIData();
+            clsApiData apiData = new clsApiData();
+            apiData.id = this.id;
+            var raw_data = apiData.GetAPIData();
 
             try
             {

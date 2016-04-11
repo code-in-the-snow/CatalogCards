@@ -20,3 +20,5 @@ C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.frmSelectBoo
 C:\Users\Owner\Documents\GitHub\CatalogCards\obj\Debug\CatalogCards.csproj.GenerateResource.Cache
 C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Owner\Documents\GitHub\CatalogCards\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Owner\Documents\Visual Studio 2013\CatalogCards\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Owner\Documents\Visual Studio 2013\CatalogCards\bin\Debug\Newtonsoft.Json.xml
