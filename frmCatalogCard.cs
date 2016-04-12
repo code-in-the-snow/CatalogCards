@@ -32,55 +32,6 @@ namespace CatalogCards
         {
             this.Close();
         }
-        
-        private static List<string> PullDictionaryData(Newtonsoft.Json.Linq.JObject obj, string detail, string root)
-        {
-            int i = 0;
-            bool is_more = true;
-            List<string> dataList = new List<string>();
-
-            while ((is_more) && (i < 5))
-            {
-                try
-                {
-                    dataList.Add((string)obj[root][detail][i]["name"]); ;
-                    i++;
-                }
-
-                catch (NullReferenceException)
-                {
-                    is_more = false;
-                }
-
-                catch (ArgumentOutOfRangeException)
-                {
-                    is_more = false;
-                }
-            }
-            return dataList;
-        }
-
-        private void GetCallNumber(Newtonsoft.Json.Linq.JObject obj)
-        {
-            string temp = "";
-            int i = 0;
-            bool is_more = true;
-            while (is_more)
-                try
-                {
-                    temp += (string)obj[id]["classifications"]["dewey_decimal_class"][i];
-                    i++;
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    is_more = false;
-                }
-                catch (NullReferenceException)
-                {
-                    is_more = false;
-                }
-            lblFiction.Text = temp;
-        }
 
         private void SplitOnSpace(string name)
         {
@@ -173,6 +124,10 @@ namespace CatalogCards
             apiData.id = this.id;
             var raw_data = apiData.GetAPIData();
 
+            clsParsing parser = new clsParsing();
+            parser.id = this.id;
+            parser.data = raw_data;
+
             try
             {
                 if ((string)raw_data[this.id]["title"] != "")
@@ -191,8 +146,8 @@ namespace CatalogCards
                     B.publisher = (string)raw_data[this.id]["publishers"][0]["name"];
                     B.publish_date = (string)raw_data[this.id]["publish_date"];
                     B.pages = (string)raw_data[this.id]["number_of_pages"];
-                    B.subjects = PullDictionaryData(raw_data, "subjects", id);
-                    B.authors = PullDictionaryData(raw_data, "authors", id);
+                    B.subjects = parser.PullDictionaryData(raw_data, "subjects", id);
+                    B.authors = parser.PullDictionaryData(raw_data, "authors", id);
 
                     SetControls(B);
 
@@ -203,7 +158,7 @@ namespace CatalogCards
 
                     if ((this.fiction == false) && B.authors[0].IndexOf(',') == -1)
                     {
-                        GetCallNumber(raw_data); 
+                        lblFiction.Text = parser.GetCallNumber(raw_data); 
                         SplitOnSpace(B.authors[0]); 
                         lblName.Text = lblName.Text.Substring(0, 3); 
 
@@ -213,7 +168,7 @@ namespace CatalogCards
 
                     else if (this.fiction == false && B.authors[0].IndexOf(',') != -1)
                     {
-                        GetCallNumber(raw_data); 
+                        lblFiction.Text = parser.GetCallNumber(raw_data); 
                         SplitOnComma(B.authors[0]);
                         lblName.Text = lblName.Text.Substring(0, 3); 
                         AuthorsToString(B.authors); 

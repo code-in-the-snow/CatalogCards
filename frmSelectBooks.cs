@@ -13,8 +13,6 @@ namespace CatalogCards
 {
     public partial class frmSelectBooks : Form
     {
-
-
         public frmSelectBooks()
         {
             InitializeComponent();
